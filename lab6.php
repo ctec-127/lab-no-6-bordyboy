@@ -25,8 +25,30 @@
 
         // You need to develop the logic to convert the temperature based on the selections and input made
 
-    } // end function
+        // based on the first and second unit selected, the program runs through some if elseif logic to apply the correct formula
+        if ($unit1 == 'celsius' && $unit2 == 'fahrenheit'){
+            $convert = ($temp * (9/5)) + 32;
+            return $convert;
+        } elseif ($unit1 == 'celsius' && $unit2 == 'kelvin') {
+            $convert = $temp + 273.15;
+            return $convert;
+        } elseif ($unit1 == 'fahrenheit' && $unit2 == 'celsius') {
+            $convert = ($temp - 32) * 5/9;
+            return $convert;
+        } elseif ($unit1 == 'fahrenheit' && $unit2 == 'kelvin') {
+            $convert = ($temp + 459.67)* 5/9;
+            return $convert;
+        } elseif ($unit1 == 'kelvin' && $unit2 == 'fahrenheit') {
+            $convert = ($temp * (9/5)) - 459.67;
+            return $convert;
+        } elseif ($unit1 == 'kelvin' && $unit2 == 'celsius') {
+            $convert = $temp - 273.15;
+            return $convert;
+        }
 
+    } // end function
+    
+    $convertedTemp = '';
     // Logic to check for POST and grab data from $_POST
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Store the original temp and units in variables
@@ -61,9 +83,11 @@
             </select>
         </div>
 
+        
+
         <div class="group">
             <label for="convertedtemp">Converted Temperature</label>
-            <input type="text" value="" name="convertedtemp" size="14" maxlength="7" id="convertedtemp" readonly>
+            <input type="text" value="<?php echo $convertedTemp; ?>" name="convertedtemp" size="14" maxlength="7" id="convertedtemp" readonly>
 
             <select name="conversionunit">
                 <option value="--Select--">--Select--</option>
